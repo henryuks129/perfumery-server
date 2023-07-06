@@ -5,6 +5,7 @@ const Router = require('./router/Router');
 const cors = require('cors');
 const userRoute = require('./router/userRoutes');
 const orderRoute = require('./router/orderRoute');
+// const loggedIn = require('./router/loggedInRoute');r
 const cookieParser = require('cookie-parser');
 
 // CONFIGURATION VARIABLES
@@ -44,6 +45,8 @@ app.use('/stores', Router)
 app.use('/auth',userRoute)
 
 app.use('/order',orderRoute)
+
+// app.use('/checkout',loggedIn)
 
 app.listen(port, ()=>{
     console.log(`DB Connection Established ${port}`);

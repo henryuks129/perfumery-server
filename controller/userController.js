@@ -69,7 +69,7 @@ const login_controller = async (req,res)=>{
 
         // finding registered email and validating email
         const existingUser = await UserModel.findOne({email});
-        if(existingUser){
+        if(!existingUser){
             return res.status(400).json({status:"false",errMsg:"Wrong credentials"})
         }
 
@@ -105,8 +105,25 @@ const logout_controller = async (req,res)=>{
     console.log("Logged out");
 }
 
+// loogedIn
+const loggedIn_conntroller = (req,res)=>{
+    try{
+        // console.log(req.cookies);
+        const token = req.cookies.token
+            if(!token){
+                return res.json(false)
+            }
+            jwt.verify(token,process.env.JWT_SECRET)
+            res.json(true)
+    }catch(err){
+        console.log(err);
+        res.json(false)
+    }
+}
+
 module.exports = {
     register_controller,
     login_controller,
-    logout_controller
+    logout_controller,
+    loggedIn_conntroller
 }
