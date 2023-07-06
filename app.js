@@ -39,7 +39,7 @@ app.get('/', (req,res)=>{
 })
 
 // ROUTES MIDDLEWARE
-// app.use('/stores', Router)
+app.use('/stores', Router)
 
 app.use('/auth',userRoute)
 
