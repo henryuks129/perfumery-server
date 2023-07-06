@@ -15,14 +15,13 @@ router.post('/create', async (req,res)=>{
         image: req.body.image,
     })
     try{
-        // if(!title || !description || !category || !price || !image || !label) {
-        //     res.status(404).json({err: "All input field must be filled"})
-        // }
-        // if(!title || !description || !category || !price || !image || !label) {
-        //     return
-        // }
-        const savedPerfumes = await perfumes.save();
-        res.status(200).json(savedPerfumes);
+        if(!title || !description || !category || !price || !image || !label) {
+            res.status(404).json({err: "All input field must be filled"})
+        }
+        if(!title || !description || !category || !price || !image || !label) {
+            const savedPerfumes = await perfumes.save();
+            res.status(200).json(savedPerfumes);
+        }
     } catch(err){
         res.status(404).json({message: err.message})
     }
