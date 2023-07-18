@@ -45,9 +45,10 @@ const register_controller = async (req,res)=>{
         console.log('Registered Successfully');
 
         // Saving token in cookie
-        res.cookie('token',token,{
-            httpOnly:true
-        }).send()
+        // res.cookie('token',token,{
+        //     httpOnly:true
+        // }).send()
+        res.json({token})
 
     } catch(error){
         console.log(error);
@@ -87,9 +88,10 @@ const login_controller = async (req,res)=>{
         console.log('Registered Successfully');
 
         // Confirming token in cookie
-        res.cookie('token',token,{
-            httpOnly:true
-        }).send()
+        // res.cookie('token',token,{
+        //     httpOnly:true
+        // }).send()
+        res.status(200).json({token})
 
     } catch(error){
         console.log(error);
@@ -98,10 +100,11 @@ const login_controller = async (req,res)=>{
 }
 
 const logout_controller = async (req,res)=>{
-    res.cookie('token',"",{
-        httpOnly:true,
-        expires:new Date(0)
-    }).send()
+    // res.cookie('token',"",{
+    //     httpOnly:true,
+    //     expires:new Date(0)
+    // }).send()
+    res.json({token:''})
     console.log("Logged out");
 }
 
@@ -109,7 +112,9 @@ const logout_controller = async (req,res)=>{
 const loggedIn_conntroller = (req,res)=>{
     try{
         // console.log(req.cookies);
-        const token = req.cookies.token
+        // const token = req.cookies.token
+        const token = req.headers.authorization
+        console.log(token);
             if(!token){
                 return res.json(false)
             }
